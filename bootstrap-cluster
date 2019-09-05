@@ -1,10 +1,5 @@
 #! /bin/bash
 
-
-kubectl apply -f helm/service-account.yml
-kubectl apply -f helm/role-binding.yml
-helm init --service-account tiller --wait
-
 # Monitoring
 
 kubectl apply -f monitoring/namespace.yml
@@ -18,6 +13,7 @@ helm install stable/prometheus \
 kubectl apply -f monitoring/grafana/config.yml
 helm install stable/grafana \
     -f monitoring/grafana/values.yml \
+    --set persistence.enabled=true --set persistence.accessModes={ReadWriteOnce} --set persistence.size=8Gi \
     --namespace monitoring \
     --name grafana
 
