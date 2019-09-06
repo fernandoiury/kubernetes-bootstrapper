@@ -1,3 +1,19 @@
+alertmanagerFiles:
+  alertmanager.yml:
+    global:
+       slack_api_url: 'https://hooks.slack.com/services/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'
+
+    receivers:
+      - name: default-receiver
+        slack_configs:
+          - channel: '#osmose-alertmanager'
+            send_resolved: true
+    route:
+      group_wait: 10s
+      group_interval: 5m
+      receiver: default-receiver
+      repeat_interval: 3h
+
 serverFiles:
   alerts:
     groups:

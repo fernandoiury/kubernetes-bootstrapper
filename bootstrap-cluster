@@ -6,6 +6,7 @@ kubectl apply -f monitoring/namespace.yml
 helm install stable/prometheus \
     --namespace monitoring \
     --name prometheus \
+    --version 9.1.0 \
     -f prometheus/values.yml
 
 kubectl apply -f monitoring/grafana/config.yml
